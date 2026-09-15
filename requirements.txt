@@ -13,4 +13,5 @@ mlflow
 matplotlib==3.10.9
 plotly==6.9.0
 
-PyYAML==6.0.3
+PyYAM==6.0.3
+pytest==9.1.1

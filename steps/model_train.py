@@ -17,9 +17,14 @@ from src.model_dev import (
     XGBModel)
 
 mlflow.autolog()
-experiment_tracker = Client().active_stack.experiment_tracker
+def get_experiment_tracker_name():
+    try:
+        tracker = Client().active_stack.experiment_tracker
+        return tracker.name if tracker else None
+    except Exception:
+        return None
 
-@step(experiment_tracker=experiment_tracker.name if experiment_tracker else None)
+@step(experiment_tracker=get_experiment_tracker_name())
 def train_model(X_train:np.ndarray,
                 X_val:np.ndarray,
                 y_train:pd.Series,

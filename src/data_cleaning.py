@@ -49,6 +49,10 @@ class DataPreprocessStrategy(DataStrategy):
             if 'Cabin' in df.columns:
                 df  = self._col_replace(df,'Cabin',['Deck','Num','Side'],'/')
 
+            for _col in ('Deck', 'Num', 'Side'):
+                if _col in df.columns:
+                    df[_col] = df[_col].replace(['nan', 'None', 'NaN', 'none', '<NA>'], np.nan)
+
             df['Deck'] = df['Deck'].fillna('U')
             df['Num'] = df['Num'].fillna(-1)
             df['Side'] = df['Side'].fillna('U')
